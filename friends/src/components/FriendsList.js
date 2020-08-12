@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import styled from 'styled-components'
 
@@ -40,6 +40,7 @@ const FriendCard = props => {
 
 const FriendsList = () => {
     const [friends, setFriends] = useState([])
+    const history = useHistory()
 
     useEffect(() => {
         axiosWithAuth().get('http://localhost:5000/api/friends')
@@ -52,6 +53,9 @@ const FriendsList = () => {
 
     return (
         <div className='componentDiv'>
+            <button onClick={() => {
+                history.push('/friend-add')
+            }}>Add A New Friend!</button>
             <Container>
                 {friends.length === 0 ? <h2 style={{color: 'red'}}>Fetching Friends Data...</h2> :
                     friends.map((f, index) => {
