@@ -6,8 +6,9 @@ const initialState = {
     password: 'i<3Lambd4'
 }
 
-const LogIn = () => {
+const LogIn = (props) => {
     const [newUser, setNewUser] = useState(initialState)
+    const history = props.history
 
     const token = (t) => {
         if(window.localStorage.getItem('token')){
@@ -31,6 +32,7 @@ const LogIn = () => {
         .then(res => {
             console.log(res)
             token(res.data.payload)
+            history.push('/')
         })
         .catch(err => console.log(err.message))
     }
