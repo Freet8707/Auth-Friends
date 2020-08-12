@@ -18,7 +18,6 @@ const Friend = styled.div`
 
 const Container = styled.div`
     width: 800px;
-    height: 100%;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -36,7 +35,7 @@ const FriendCard = props => {
         .catch(err => console.log(err))
     }
     return (
-        <Link to={`/friends-list/${friend.id}`}>
+        <Link style={{textDecoration: 'none'}} to={`/friends-list/${friend.id}`}>
             <Friend>
                 <h1>{friend.name}</h1>
                 <h3>{friend.age}</h3>

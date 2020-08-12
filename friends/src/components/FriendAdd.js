@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 const initialState = {
@@ -9,7 +10,7 @@ const initialState = {
 
 const FriendAdd = () => {
     const [newFriend, setNewFriend] = useState(initialState)
-
+    const history = useHistory()
     const handleChange = (e) => {
         setNewFriend({
             ...newFriend,
@@ -24,12 +25,15 @@ const FriendAdd = () => {
         })
         console.log(newFriend)
     }, [newFriend.age])
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(newFriend)
         axiosWithAuth().post('http://localhost:5000/api/friends', newFriend)
-        .then(res => console.log(res))
+        .then(res => {
+            console.log(res)
+            history.push('/friends-list')
+        })
         .catch(err => console.log(err.message))
         setNewFriend(initialState)
     }
