@@ -54,8 +54,10 @@ app.use(cors());
 function authenticator(req, res, next) {
   const { authorization } = req.headers;
   if (authorization === token) {
+    console.log('success')
     next();
   } else {
+    console.log('error')
     res.status(403).json({ error: 'User must be logged in to do that.' });
   }
 }
