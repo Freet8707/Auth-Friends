@@ -27,12 +27,21 @@ const Container = styled.div`
 const FriendCard = props => {
     const friend = props.friend;
     // console.log(friend)
+    const handleDelete = () => {
+        axiosWithAuth().delete(`http://localhost:5000/api/friends/${friend.id}`)
+        .then(res => {
+            console.log(res)
+            props.history.push('/friends-list')
+        })
+        .catch(err => console.log(err))
+    }
     return (
         <Link to={`/friends-list/${friend.id}`}>
             <Friend>
                 <h1>{friend.name}</h1>
                 <h3>{friend.age}</h3>
                 <h3>{friend.email}</h3>
+                <h3>Delete friend? Click <span style={{color: 'red'}} onClick={handleDelete}>Here</span></h3>
             </Friend>
         </Link>
     )
@@ -59,7 +68,7 @@ const FriendsList = () => {
             <Container>
                 {friends.length === 0 ? <h2 style={{color: 'red'}}>Fetching Friends Data...</h2> :
                     friends.map((f, index) => {
-                        return <FriendCard key={index} friend={f} />
+                        return <FriendCard history={history} key={index} friend={f} />
                     })
                 }
             </Container>

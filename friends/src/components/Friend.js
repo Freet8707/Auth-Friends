@@ -18,7 +18,7 @@ const Friend = () => {
     
     return (
         <div className='homeDiv'>
-
+            <p style={{margin: '0', padding: 'none'}}>{friend.name}</p>
         </div>
     )
 }
