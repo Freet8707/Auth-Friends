@@ -7,6 +7,7 @@ import Header from './components/Header'
 import Home from './components/Home'
 import LogIn from './components/Login'
 import FriendsList from './components/FriendsList'
+import Friend from './components/Friend'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Header />
       </div>
       <Switch>
+        <PrivateRoute exact path='/friends-list/:id' component={Friend} />
         <PrivateRoute exact path='/friends-list' component={FriendsList} />
         <Route path='/login' component={LogIn} />
         <Route exact path='/' component={Home} />
