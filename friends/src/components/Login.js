@@ -10,13 +10,7 @@ const LogIn = (props) => {
     const [newUser, setNewUser] = useState(initialState)
     const history = props.history
 
-    const token = (t) => {
-        if(window.localStorage.getItem('token')){
-            return false
-        }
-        
-        return window.localStorage.setItem('token', t)
-    }
+   
 
     const handleChange = (e) => {
         setNewUser({
@@ -31,8 +25,8 @@ const LogIn = (props) => {
         axios.post('http://localhost:5000/api/login', newUser)
         .then(res => {
             console.log(res)
-            token(res.data.payload)
-            history.push('/')
+            window.localStorage.setItem('token', res.data.payload)
+            history.push('/friends-list')
         })
         .catch(err => console.log(err.message))
     }
